@@ -20,8 +20,8 @@ export default function IntroSection(){
     return React.createElement(
         'section', 
         null, [
-        React.createElement('h1', {className: 'centered'}, 'Intro'),
-        React.createElement('h3', {className: 'centered', style:{color: '#666'}}, 
+        React.createElement('h1', {className: 'centered', key: 1}, 'Intro'),
+        React.createElement('h3', {className: 'centered', style:{color: '#666'}, key: 2}, 
             'Test App react js and vite')
     ])
 }
