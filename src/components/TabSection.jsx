@@ -1,11 +1,11 @@
 import React from 'react'
 import Button from './Button/Button'
 
-export default function TabSection() {
+export default function TabSection({active, onChange}) {
   return (
-    <section>
-        <Button> Main </Button>
-        <Button> FeedBack </Button>
+    <section style={{marginBottom : '1rem'}}>
+        <Button isActive = {active =='main'} onClick = {()=>onChange('main')}>Main</Button>
+        <Button isActive = {active =='feedback'} onClick = {()=>onChange('feedback')}>FeedBack</Button>
     </section>
   )
 }
