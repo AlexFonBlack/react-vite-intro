@@ -1,5 +1,5 @@
 
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import FirstSection from './components/FirstSection';
 import SecondSection from './components/SecondSection';
 import IntroSection from './components/IntroSection';
@@ -7,6 +7,7 @@ import TabSection from './components/TabSection';
 import { useState } from 'react';
 import FeedBackSection from './components/FeedBackSection';
 // import { Fragment } from 'react';
+// install lib for styles: npm i styled-components //look a Header.jsx
 
 
 
