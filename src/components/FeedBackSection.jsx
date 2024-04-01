@@ -3,18 +3,43 @@ import Button from "./Button/Button"
 
 export default function FeedBackSection() {
 
-  const [name, setName] = useState('')
-  const [hasError, setHasError] = useState(false)
-  const [reason, setReason] = useState('suggest')
+  //Основной вариант создания useState (отслеживание состояния)
+  // const [name, setName] = useState('')
+  // const [hasError, setHasError] = useState(false)
+  // const [reason, setReason] = useState('suggest')
+
+  //Второй вариант с группировкой в один объект:
+  const [form, setForm] = useState({
+    name: '',
+    hasError: false,
+    reason: 'suggest'
+  })
 
   function handleNameChange(event){
-    setName(event.target.value)
-    setHasError(event.target.value.trim().length == 0)
+    //----Для первого варианта:
+    // setName(event.target.value)
+    // setHasError(event.target.value.trim().length == 0)
+    //Для второго:
+    setForm((prev) => ({
+      ...prev,
+      name: event.target.value,
+      hasError: event.target.value.trim().length == 0
+    }))
   }
+
+  //prev - ддя передачи предыдущего значениея состояния 
+  // const toggleError = () => {
+    // setHasError((prev) => !prev)
+    // console.log(hasError) //новое состояние основываясь от предыдущего
+  // }
 
   return (
     <section>
         <h3>FeedBack</h3>
+
+        {/* block for useRef */}
+
+        {/* <Button onClick={toggleError}> Toggle Error </Button> */}
 
         <form>
           <label htmlFor="name">Your name</label>
@@ -22,31 +47,30 @@ export default function FeedBackSection() {
             type="text" 
             id="name" 
             className="control" 
-            value={name}
+            value={form.name}
             style = {{
-              border: hasError ? '1px solid red' : null,
+              border: form.hasError ? '1px solid red' : null,
             }}
             onChange={handleNameChange}            
           />
 
           <label htmlFor="reason">Reason</label>
-          <select id="reason" className="control" value={reason} onChange={event => setReason(event.target.value)}>
+          <select id="reason" 
+            className="control" 
+            value={form.reason} 
+            onChange={(event) => 
+              setForm((prev) =>({...prev, reason: event.target.value}))}
+          >
             <option value="error">Error</option>
             <option value="help">Help</option>
             <option value="suggest">Suggest</option>
           </select>
 
           <pre>
-            <hr />
-            Name: {name}
-            <br />
-            Reason: {reason}
-            <br />
-            hasError: {hasError}
-            <hr />
+            {JSON.stringify(form, null, 2)}
           </pre>
 
-          <Button disabled = {hasError} isActive={!hasError}>Send</Button>
+          <Button disabled = {form.hasError} isActive={!form.hasError}>Send</Button>
         </form>        
     </section>
   )
