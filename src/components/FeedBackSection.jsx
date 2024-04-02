@@ -1,14 +1,25 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Button from "./Button/Button"
 
 function StateVsRef() {
 
-  const [value, setValue] = useState('')
+  const input = useRef()
+  const [show, setShow] = useState(false)
+
+  function handleKeyDown(e) {
+    if (e.key == 'Enter') {
+      setShow(true)
+    }
+  }
 
   return(
     <div>
-      <h3>Input value: {value}</h3>
-      <input type="text" value={value} onChange={(e)=> setValue(e.target.value)} className="control"/>
+      <h3>Input value: {show && input.current.value}</h3>
+      <input 
+      ref = {input} 
+      type="text" 
+      onKeyDown={handleKeyDown}
+      className="control"/>
     </div>
   )
 }
